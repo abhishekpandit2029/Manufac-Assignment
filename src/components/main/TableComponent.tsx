@@ -1,6 +1,6 @@
 import { Table } from '@mantine/core';
 
-type ElementTuple = [number | string, number | string, number | string];
+type ElementTuple = [number | string | null, number | string | null, number | string | null];
 
 type ElementArray = ElementTuple;
 
@@ -12,7 +12,7 @@ interface ITableProps {
 export default function TableComponent(props: ITableProps) {
     const { head, rowData } = props
 
-    return <Table stickyHeader data={{
+    return <Table stickyHeader withTableBorder withColumnBorders withRowBorders data={{
         head,
         body: rowData,
     }} />;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IDataSource } from "../../interfaces/main";
 import { data } from "../datasource/Data";
 import TableComponent from "../main/TableComponent";
+import "../../index.css"
 
 export default function Dashboard() {
     const [results, setResults] = useState<Array<{
@@ -77,18 +78,31 @@ export default function Dashboard() {
         setResults(results);
     }, []);
 
-    console.log("resss", results)
-
     return (
-        <div>
-            {/* <div className="m-40">
-                <TableComponent head={["Year ", "Crop with Maximum Production in that Year", "Crop with Minimum Production in that Year"]} rowData={results?.map(item => [item.Year, item.Highest, item.Lowest])} />
-            </div> */}
-            <div className="m-40">
-                <TableComponent head={["Crop", "Average Yield of the Crop between 1950 - 2020", "Average Cultivation Area of the Crop between 1950 - 2020"]} rowData={AccessData?.map(item => [item.crop_name, item.yield_of_crops, item.area_under_cultivation])} />
+        <div className="initial-body">
+            <h2 style={{ textAlign: "center", marginBottom: "30px" }}>Indian Agriculture Data Analysis: Crop Production and Yield Statistics (1950-2020)</h2>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div className="scroll-wrapper">
+                    <div className="scroll-inner">
+                        <TableComponent
+                            head={["Year", "Crop with Maximum Production in that Year", "Crop with Minimum Production in that Year"]}
+                            rowData={results?.map(item => [item.Year, item.Highest, item.Lowest]) || []}
+                        />
+                    </div>
+                </div>
+                <p style={{ position: "relative", bottom: "45px", fontSize: "15px" }}>Scroll to view more.</p>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div className="scroll-wrapper">
+                    <div className="scroll-inner">
+                        <TableComponent head={["Crop", "Average Yield of the Crop between 1950 - 2020", "Average Cultivation Area of the Crop between 1950 - 2020"]} rowData={AccessData?.map(item => [item.crop_name, item.yield_of_crops, item.area_under_cultivation])} />
+                        <p>Scroll to view more.</p>
+                    </div>
+                </div>
+                <p style={{ position: "relative", bottom: "45px", fontSize: "15px" }}>Scroll to view more.</p>
             </div>
         </div>
-
     );
 }
 

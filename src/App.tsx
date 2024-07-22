@@ -3,7 +3,6 @@ import { MantineProvider } from "@mantine/core";
 import { theme } from "./theme";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
-import "./index.css"
 
 export default function App() {
   return (
