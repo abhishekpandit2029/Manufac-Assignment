@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { IDataSource } from "../../interfaces/main";
 import { data } from "../datasource/Data";
-import TableComponent from "../main/TableComponent";
+import TableComponent, { ElementTuple } from "../main/TableComponent";
 import "../../index.css"
+
+type TableMappingType = {
+    head: string[];
+    rowData: ElementTuple[];
+};
 
 export default function Dashboard() {
     const [results, setResults] = useState<Array<{
@@ -19,6 +24,17 @@ export default function Dashboard() {
         yield_of_crops: item["Yield Of Crops (UOM:Kg/Ha(KilogramperHectare))"],
         area_under_cultivation: item["Area Under Cultivation (UOM:Ha(Hectares))"]
     })) || [];
+
+    const TableMapping: TableMappingType[] = [
+        {
+            head: ["Year", "Crop with Maximum Production in that Year", "Crop with Minimum Production in that Year"],
+            rowData: results?.map(item => [item.Year, item.Highest, item.Lowest] as ElementTuple) || []
+        },
+        {
+            head: ["Crop", "Average Yield of the Crop between 1950 - 2020", "Average Cultivation Area of the Crop between 1950 - 2020"],
+            rowData: AccessData?.map(item => [item.crop_name, item.yield_of_crops, item.area_under_cultivation] as ElementTuple) || []
+        },
+    ];
 
     useEffect(() => {
         function extractYear(yearString: string): string {
@@ -81,27 +97,22 @@ export default function Dashboard() {
     return (
         <div className="initial-body">
             <h2 style={{ textAlign: "center", marginBottom: "30px" }}>Indian Agriculture Data Analysis: Crop Production and Yield Statistics (1950-2020)</h2>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div className="scroll-wrapper">
-                    <div className="scroll-inner">
-                        <TableComponent
-                            head={["Year", "Crop with Maximum Production in that Year", "Crop with Minimum Production in that Year"]}
-                            rowData={results?.map(item => [item.Year, item.Highest, item.Lowest]) || []}
-                        />
-                    </div>
-                </div>
-                <p style={{ position: "relative", bottom: "45px", fontSize: "15px" }}>Scroll to view more.</p>
-            </div>
 
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div className="scroll-wrapper">
-                    <div className="scroll-inner">
-                        <TableComponent head={["Crop", "Average Yield of the Crop between 1950 - 2020", "Average Cultivation Area of the Crop between 1950 - 2020"]} rowData={AccessData?.map(item => [item.crop_name, item.yield_of_crops, item.area_under_cultivation])} />
-                        <p>Scroll to view more.</p>
-                    </div>
-                </div>
-                <p style={{ position: "relative", bottom: "45px", fontSize: "15px" }}>Scroll to view more.</p>
-            </div>
+            <>
+                {
+                    TableMapping?.map((item, index) => (
+                        <div className="table-div" key={index}>
+                            <div className="scroll-wrapper">
+                                <div className="scroll-inner">
+                                    <TableComponent head={item.head} rowData={item.rowData} />
+                                    <p>Scroll to view more.</p>
+                                </div>
+                            </div>
+                            <p className="scroll-text">Scroll to view more.</p>
+                        </div>
+                    ))
+                }
+            </>
         </div>
     );
 }

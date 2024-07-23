@@ -1051,7 +1051,7 @@ postcss-selector-parser@^6.0.11:
 postcss-simple-vars@^7.0.0, postcss-simple-vars@^7.0.1:
   version "7.0.1"
 
-postcss@^8.4.38:
+postcss@^8.4.38, postcss@^8.4.39:
   version "8.4.39"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.39.tgz"
   integrity sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==

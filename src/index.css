@@ -15,3 +15,15 @@
 .scroll-inner::-webkit-scrollbar {
     display: none;
 }
+
+.table-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-text {
+    position: relative;
+    bottom: 45px;
+    font-size: 15px;
+}
