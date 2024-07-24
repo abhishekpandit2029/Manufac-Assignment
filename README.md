@@ -27,19 +27,25 @@ This is a Vite React project with the following folder structure:
 
 ## Installation
 
-To install the project dependencies, run after clone it:
+1. Clone the repository using the following link:
+
+```bash
+git clone https://github.com/abhishekpandit2029/Manufac-Assignment.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd Manufac-Assignment
+```
+
+3. Install the project dependencies:
 
 ```bash
 yarn install
 ```
 
 ## Development
-
-To update dependencies, use the following command:
-
-```bash
-yarn dev
-```
 
 To start the development server, use the following command:
 
